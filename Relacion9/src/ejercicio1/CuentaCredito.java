@@ -2,26 +2,28 @@ package ejercicio1;
 
 public class CuentaCredito extends Cuenta {
 	
+	private static final int CREDITO_MAXIMO = 300;
+	private static final int CREDITO_DEFAULT = 100;
 	private double credito;
 
 	public CuentaCredito(double saldo, String titular, double credito) throws CuentaException {
 		super(saldo, titular);
-		this.credito = credito;
+		setCredito(credito);
 	}
 	
 	public CuentaCredito(double saldo, String titular) throws CuentaException {
 		super(saldo, titular);
-		this.credito = 100;
+		setCredito(CREDITO_DEFAULT);
 	}
 	
 	public CuentaCredito(String titular, double credito) throws CuentaException {
 		super(titular);
-		this.credito = credito;
+		setCredito(credito);
 	}
 	
 	public CuentaCredito(String titular) throws CuentaException {
 		super(titular);
-		this.credito = 0;
+		setCredito(CREDITO_DEFAULT);
 	}
 
 	public double getCredito() {
@@ -29,10 +31,10 @@ public class CuentaCredito extends Cuenta {
 	}
 
 	public void setCredito(double credito) throws CuentaException {
-		if(credito>300 || credito<0) {
+		if(credito>CREDITO_MAXIMO || credito<0) {
 			throw new CuentaException("El credito debe ser un numero positivo como maximo 300");
 		}
-		if(super.getSaldo()<credito*-1) {
+		if(super.getSaldo()<-credito) {
 			throw new CuentaException("No puedes poner un credito menor a la cantidad negativa");
 		}
 		this.credito=credito;
