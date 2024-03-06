@@ -32,7 +32,20 @@ public class Mago extends Personaje {
 
 	@Override
 	public String toString() {
-		return "Mago "+ super.toString()+" hechizos= " + Arrays.toString(hechizos);
+		StringBuilder mostrarTodo=new StringBuilder();
+		
+		mostrarTodo.append("Mago "+ super.toString()+"\n Hechizos: ");
+		
+		for (int i = 0; i < hechizos.length; i++) {
+			if(hechizos[i]==null) {
+				mostrarTodo.append("-\t\t\t");
+			}else {
+				mostrarTodo.append("-"+hechizos[i]+"\t");
+			}
+		}
+		
+		
+		return mostrarTodo.toString();
 	}
 
 	public void aprenderHechizo(String nombre) throws PersonajeException {
@@ -59,12 +72,7 @@ public class Mago extends Personaje {
 		}
 		
 		hechizos[posicionHechizo]=null;
-		
-		if(personaje1.getVidaActual()-SPELL_DAMAGE<0) {
-			personaje1.setVidaActual(0);
-		}else {
-			personaje1.setVidaActual(personaje1.getVidaActual()-SPELL_DAMAGE);
-		}
+		personaje1.setVidaActual(personaje1.getVidaActual()-SPELL_DAMAGE);
 		
 		
 	}

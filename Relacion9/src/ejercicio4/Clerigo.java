@@ -5,7 +5,7 @@ public class Clerigo extends Personaje {
 	private static final int CURACION_CLERIGO = 10;
 	private static final int FUERZA_MIN_CLERIGO = 18;
 	private static final int INTELIGENCIA_MIN_CLERIGO = 12;
-	private static final int INTELIGENCIA_MAX_CLERIGO = 18;
+	private static final int INTELIGENCIA_MAX_CLERIGO = 16;
 	private String dios;
 
 	public Clerigo(String nombre, TRaza raza, int fuerza, int inteligencia, int vidaMaxima, String dios)
@@ -43,7 +43,7 @@ public class Clerigo extends Personaje {
 	
 	@Override
 	public String toString() {
-		return "Clerigo "+super.toString()+" dios= " + dios;
+		return "Clerigo "+super.toString()+" Dios= " + dios;
 	}
 
 
