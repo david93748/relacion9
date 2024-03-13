@@ -1,8 +1,8 @@
-package ejercicio5;
+package ejercicio7;
 
 import java.util.Arrays;
 
-public class ListaPersonajes {
+public class ListaPersonajes implements CreableEstdisticas {
 
 	private Personaje listaPersonajes[];
 	private int cantidadPersonajes;
@@ -39,8 +39,8 @@ public class ListaPersonajes {
 		if (encontrarPersonaje(personajeAnnadir.getNombre()) != null) {
 			throw new PersonajeException("Ya hay un personaje con ese nombre");
 		}
-		
-		if(cantidadPersonajes==listaPersonajes.length) {
+
+		if (cantidadPersonajes == listaPersonajes.length) {
 			throw new PersonajeException("No se pueden añadir mas personajes");
 		}
 
@@ -95,12 +95,12 @@ public class ListaPersonajes {
 			throw new PersonajeException("El nombre del mago atacante no es correcto");
 		}
 
-		if (encontrarPersonaje(nombrePersonajeDefiende) !=null) {
+		if (encontrarPersonaje(nombrePersonajeDefiende) != null) {
 			personajeDefensor = encontrarPersonaje(nombrePersonajeDefiende);
 		} else {
 			throw new PersonajeException("El nombre del personaje atacado no es correcto");
 		}
-		
+
 		magoAtacante.lanzarHechizo(nombreHechizo, personajeDefensor);
 
 	}
@@ -128,15 +128,15 @@ public class ListaPersonajes {
 		} else {
 			throw new PersonajeException("El nombre del clerigo sanador no es correcto");
 		}
-		
-		if (encontrarPersonaje(nombrePersonaje) !=null) {
+
+		if (encontrarPersonaje(nombrePersonaje) != null) {
 			personajeSanado = encontrarPersonaje(nombrePersonaje);
 		} else {
 			throw new PersonajeException("El nombre del personaje a curar no es coorecto");
 		}
-		
+
 		clerigoSanador.curar(personajeSanado);
-		
+
 	}
 
 	/**
@@ -166,14 +166,14 @@ public class ListaPersonajes {
 	 * @return String del array ya ordenado
 	 */
 	public String mostrarListadoPuntosActuales() {
-		StringBuilder sb =new StringBuilder();
-		
-		Arrays.sort(listaPersonajes,0,cantidadPersonajes);
-		
+		StringBuilder sb = new StringBuilder();
+
+		Arrays.sort(listaPersonajes, 0, cantidadPersonajes);
+
 		for (int i = 0; i < cantidadPersonajes; i++) {
-			sb.append(listaPersonajes[i]+"\n");
+			sb.append(listaPersonajes[i] + "\n");
 		}
-		
+
 		return sb.toString();
 
 	}
@@ -197,6 +197,46 @@ public class ListaPersonajes {
 
 		return personajeEncontrado;
 
+	}
+
+	@Override
+	public double minimo() {
+		int vidaMinima = Integer.MAX_VALUE;
+
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			if (listaPersonajes[i].getVidaActual() < vidaMinima) {
+				vidaMinima = listaPersonajes[i].getVidaActual();
+			}
+		}
+
+		return vidaMinima;
+	}
+
+	@Override
+	public double maximo() {
+		int vidaMaxima = -1;
+
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			if (listaPersonajes[i].getVidaActual() > vidaMaxima) {
+				vidaMaxima = listaPersonajes[i].getVidaActual();
+			}
+		}
+
+		return vidaMaxima;
+	}
+
+	@Override
+	public double media() {
+		double media = 0;
+
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			media = media + listaPersonajes[i].getVidaActual();
+
+		}
+
+		media = media / cantidadPersonajes;
+
+		return media;
 	}
 
 }
